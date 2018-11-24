@@ -1,4 +1,5 @@
-import { isValidPosition } from './piecePosition';
+import { PIECE_TYPE } from '../constants';
+import { isValidPiecePosition, placePieceOnBoard } from './piecePosition';
 
 const left = ( angle ) => angle === 270 ? 0 : angle + 90;
 const right = ( angle ) => angle === 0 ? 270 : angle - 90;
@@ -29,7 +30,20 @@ export const moveDown =  ({ board, piece }) => {
         },
     };
 
-    return isValidPosition(board, pieceNewLocation.piece) ? pieceNewLocation : piece;
+    if (isValidPiecePosition(board, pieceNewLocation.piece)) {
+        return pieceNewLocation;
+    }
+    
+    // This is when the piece hits something. We need to move it to the board and get new piece
+    return {
+        board: placePieceOnBoard(board, piece), 
+        piece: {
+            type: PIECE_TYPE.J,
+            x: 4,
+            y: 1,
+            angle: 0,
+        },
+    }
 };
 
 export const moveLeft = ({ board, piece }) => {
@@ -40,7 +54,8 @@ export const moveLeft = ({ board, piece }) => {
         },
     };
 
-    return isValidPosition(board, pieceNewLocation.piece) ? pieceNewLocation : piece;
+    // Improvement: In this case we didn't need to update state
+    return isValidPiecePosition(board, pieceNewLocation.piece) ? pieceNewLocation : piece;
 };
 
 export const moveRight = ({ board, piece }) => {
@@ -51,5 +66,6 @@ export const moveRight = ({ board, piece }) => {
         },
     };
 
-    return isValidPosition(board, pieceNewLocation.piece) ? pieceNewLocation : piece;
+    // Improvement: In this case we didn't need to update state
+    return isValidPiecePosition(board, pieceNewLocation.piece) ? pieceNewLocation : piece;
 };

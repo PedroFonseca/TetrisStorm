@@ -4,13 +4,10 @@
 
 .Cell{
     display: inline-block;
+    background-color: lightgray;
     border: 1px solid gray;
     width: 30px;
     height: 30px;
-}
-
-.Background{
-    background-color: lightgray;
 }
 
 .I{

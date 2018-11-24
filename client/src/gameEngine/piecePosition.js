@@ -1,11 +1,26 @@
 import { PIECE_TYPE } from '../constants';
 
-export const isValidPosition = (board, piece) => {
+export const isValidPiecePosition = (board, piece) => areValidPositions(board, calculatePiecePositions(piece));
+
+const areValidPositions = (board, positions) => {
     let linesNr = board.length;
     let colsNr = board[0].length;
+    
+    return positions.every(t => t.x >= 0 && t.x < colsNr && t.y > 0 && t.y < linesNr) && areAllPositionsEmpty(board, positions);
+}
+
+const areAllPositionsEmpty = (board, positions) => positions.every(pos => isEmptyCell(board, pos.x, pos.y));
+const isEmptyCell = (board, x, y) => board[y][x] === undefined;
+const isPositionInArray = (positions, x, y) => positions.some(pos => pos.x === x && pos.y === y);
+
+export const placePieceOnBoard = (board, piece) => {
     let positions = calculatePiecePositions(piece);
 
-    return !positions.some(t => t.x < 0 || t.x >= colsNr || t.y >= linesNr );
+    if (!areValidPositions(board, positions)){
+        console.error('This should not happen!');
+    }
+
+    return board.map((line, y) => line.map((cell, x) => isPositionInArray(positions, x, y) ? piece.type : cell ));
 }
 
 export const calculatePiecePositions = ({ type, x, y, angle }) => {

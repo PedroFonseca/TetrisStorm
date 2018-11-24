@@ -12,10 +12,17 @@ export default class GameProvider extends Component {
     }
 
     componentDidMount(){
-      document.addEventListener("keydown", this._onKeyDown, false);
+        document.addEventListener("keydown", this._onKeyDown, false);
+
+        this.timer = setInterval(
+            () => this.setState(prevState => moveDown(prevState)),
+            1000,
+        );
     }
+
     componentWillUnmount(){
       document.removeEventListener("keydown", this._onKeyDown, false);
+      clearInterval(this.timer);
     }
 
     render(){
@@ -29,11 +36,11 @@ export default class GameProvider extends Component {
     }
     onKeyDown(key) {
         switch (key.code){
-            case 'ArrowUp': this.setState(turnLeft(this.state)); break;
-            case 'ArrowDown': this.setState(moveDown(this.state)); break;
-            case 'ControlLeft': this.setState(turnRight(this.state)); break;
-            case 'ArrowRight': this.setState(moveRight(this.state)); break;
-            case 'ArrowLeft': this.setState(moveLeft(this.state)); break;
+            case 'ArrowUp': this.setState(prevState => turnLeft(prevState)); break;
+            case 'ArrowDown': this.setState(prevState => moveDown(prevState)); break;
+            case 'ControlLeft': this.setState(prevState => turnRight(prevState)); break;
+            case 'ArrowRight': this.setState(prevState => moveRight(prevState)); break;
+            case 'ArrowLeft': this.setState(prevState => moveLeft(prevState)); break;
             default: console.log(key.code); break;
         }
     }

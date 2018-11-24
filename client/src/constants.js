@@ -7,8 +7,3 @@ export const PIECE_TYPE = {
     T: 'T',
     Z: 'Z',
 };
-
-export const COLORS = {
-    BACKGROUND: 'Background',
-    ...PIECE_TYPE,
-};
