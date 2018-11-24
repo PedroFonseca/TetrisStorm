@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { number } from 'prop-types';
-import { generateArray } from '../util/helperFunctions';
+import { number, array } from 'prop-types';
+import classNames from 'classnames';
+import { withGameProvider } from '../context/withGameProvider';
 import './Board.css';
 
 const propTypes= {
    lines: number,
    columns: number,
+   board: array,
 };
 
 class Board extends Component {
@@ -20,27 +22,25 @@ class Board extends Component {
   render() {
     return (
         <div className="Board">
-          { this._renderLines() }
+          { this.renderLines(this.props.board) }
         </div>
     );
   }
 
-  renderLines() {
-    return generateArray(this.props.lines).map(this._renderLine);
+  renderLines(board) {
+    return board.map((col, index) => this.renderLine(col, index));
   }
 
-  renderLine(lineNr) {
-    return (<div className="Line">
-      { generateArray(this.props.columns).map(t => this._renderCol(lineNr, t)) }
+  renderLine(col, lineNr) {
+    return (<div className="Line" key={ lineNr }>
+      { col.map((cell, index) => this.renderCol(cell, lineNr, index)) }
     </div>);
   }
 
-  renderCol(lineNr, colNr) {
-    return (<div className="Cell">
-      {lineNr}, { colNr }
-    </div>);
+  renderCol(cell, lineNr, colNr) {
+    return (<div className={ classNames("Cell", cell) } key={`${lineNr} - ${colNr}`}>&nbsp;</div>);
   }
 }
 Board.propTypes = propTypes;
 
-export default Board;
+export default withGameProvider(Board);

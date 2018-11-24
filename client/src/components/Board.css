@@ -5,6 +5,38 @@
 .Cell{
     display: inline-block;
     border: 1px solid gray;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
+}
+
+.Background{
+    background-color: lightgray;
+}
+
+.I{
+    background-color: cyan;
+}
+
+.J{
+    background-color: blue;
+}
+
+.L{
+    background-color: orange;
+}
+
+.O{
+    background-color: yellow;
+}
+
+.S{
+    background-color: green;
+}
+
+.T{
+    background-color: deeppink;
+}
+
+.Z{
+    background-color: red;
 }
