@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { GameContext, defaultContextValue } from './gameContext';
 import { drawBoard } from '../gameEngine/drawBoard';
-import { turnLeft, turnRight, moveDown, moveLeft, moveRight } from '../gameEngine/gameBrain';
+import { turnLeft, turnRight, moveDown, moveLeft, moveRight, drop } from '../gameEngine/gameBrain';
 
 export default class GameProvider extends Component {
     constructor(props) {
@@ -41,6 +41,7 @@ export default class GameProvider extends Component {
             case 'ControlLeft': this.setState(prevState => turnRight(prevState)); break;
             case 'ArrowRight': this.setState(prevState => moveRight(prevState)); break;
             case 'ArrowLeft': this.setState(prevState => moveLeft(prevState)); break;
+            case 'Space': this.setState(prevState => drop(prevState)); break;
             default: console.log(key.code); break;
         }
     }

@@ -46,6 +46,14 @@ export const moveDown =  ({ board, piece }) => {
     }
 };
 
+export const drop = ({ board, piece }) => {
+    let result = moveDown({ board, piece });
+    while(!result.board){
+        result = moveDown({ board, piece: result.piece });
+    }
+    return result;
+};
+
 export const moveLeft = ({ board, piece }) => {
     const pieceNewLocation = {
         piece: {
