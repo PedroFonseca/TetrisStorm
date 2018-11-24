@@ -1,0 +1,10 @@
+.Board{
+    border: 1px solid black;
+}
+
+.Cell{
+    display: inline-block;
+    border: 1px solid gray;
+    width: 40px;
+    height: 40px;
+}
