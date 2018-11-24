@@ -5,8 +5,7 @@ export function withGameProvider(Component) {
   return function GameComponent(props) {
     return (
       <GameContext.Consumer>
-        {(contexts) => <Component {...props} {...contexts} />
-        }
+        {(contexts) => <Component {...props} {...contexts} />}
       </GameContext.Consumer>
     )
   }

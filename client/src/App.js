@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <GameProvider>
         <div className="App">
-          <Board lines={25} columns={10} />
+          <Board />
         </div>
       </GameProvider>
     );

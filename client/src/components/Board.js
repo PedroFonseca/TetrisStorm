@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { number, array } from 'prop-types';
+import { number, string, arrayOf } from 'prop-types';
 import classNames from 'classnames';
 import { withGameProvider } from '../context/withGameProvider';
 import './Board.css';
@@ -7,7 +7,7 @@ import './Board.css';
 const propTypes= {
    lines: number,
    columns: number,
-   board: array,
+   board: arrayOf(arrayOf(string)),
 };
 
 class Board extends Component {
