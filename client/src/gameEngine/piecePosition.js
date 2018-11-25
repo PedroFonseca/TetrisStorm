@@ -1,4 +1,5 @@
 import { PIECE_TYPE } from '../constants';
+import { generateLines } from '../util/helperFunctions';
 
 export const isValidPiecePosition = (board, piece) => areValidPositions(board, calculatePiecePositions(piece));
 
@@ -12,6 +13,7 @@ const areValidPositions = (board, positions) => {
 const areAllPositionsEmpty = (board, positions) => positions.every(pos => isEmptyCell(board, pos.x, pos.y));
 const isEmptyCell = (board, x, y) => board[y][x] === undefined;
 const isPositionInArray = (positions, x, y) => positions.some(pos => pos.x === x && pos.y === y);
+const isLineFilled = (line) => line.filter((cell) => cell === undefined).length === 0;
 
 export const placePieceOnBoard = (board, piece) => {
     let positions = calculatePiecePositions(piece);
@@ -20,8 +22,18 @@ export const placePieceOnBoard = (board, piece) => {
         console.error('This should not happen!');
     }
 
-    return board.map((line, y) => line.map((cell, x) => isPositionInArray(positions, x, y) ? piece.type : cell ));
+    let newBoard = board.map((line, y) => line.map((cell, x) => isPositionInArray(positions, x, y) ? piece.type : cell ));
+    return removeFullLines(newBoard);
 }
+
+const removeFullLines = (board) => {
+    let linesWithoutFilled = board.filter((line) => !isLineFilled(line));
+    let nrLinesRemoved = board.length - linesWithoutFilled.length;
+
+    return nrLinesRemoved === 0 ? board : addEmptyLines(linesWithoutFilled, nrLinesRemoved);
+}
+
+const addEmptyLines = (board, nrLines) => [...generateLines(nrLines), ...board];
 
 export const calculatePiecePositions = ({ type, x, y, angle }) => {
     switch(type) {
