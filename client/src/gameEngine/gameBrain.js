@@ -1,24 +1,24 @@
 import { PIECE_TYPE } from '../constants';
-import { isValidPiecePosition, placePieceOnBoard } from './piecePosition';
+import { isValidPiecePosition, placePieceOnBoard, getPieceValidPosition } from './piecePosition';
 
 const left = ( angle ) => angle === 270 ? 0 : angle + 90;
 const right = ( angle ) => angle === 0 ? 270 : angle - 90;
 
-export const turnLeft = ({ piece }) => {
+export const turnLeft = ({ board, piece }) => {
     return {
-        piece: {
+        piece: getPieceValidPosition(board, {
             ...piece,
             angle: left(piece.angle),
-        },
+        }),
     };
 };
 
-export const turnRight = ({ piece }) => {
+export const turnRight = ({ board, piece }) => {
     return {
-        piece: {
+        piece: getPieceValidPosition(board, {
             ...piece,
             angle: right(piece.angle),
-        },
+        }),
     };
 };
 

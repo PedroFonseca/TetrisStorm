@@ -5,7 +5,7 @@ import { PIECE_TYPE } from '../constants';
 export const defaultContextValue = {
     board: generateBoard(),
     piece: {
-        type: PIECE_TYPE.Z,
+        type: PIECE_TYPE.I,
         x: 4,
         y: 1,
         angle: 0,

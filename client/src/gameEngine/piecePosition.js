@@ -26,6 +26,46 @@ export const placePieceOnBoard = (board, piece) => {
     return removeFullLines(newBoard);
 }
 
+const positionsToTry = [
+    // Default position
+    { x: 0, y: 0 },
+    // Left and right
+    { x: -1, y: 0 }, { x: 1, y: 0 },
+    // line above
+    { x: 0, y: -1 }, { x: -1, y: -1 }, { x: 1, y: -1 },
+    // line bellow
+    { x: 0, y: 1 },
+    // Two space same line
+    { x: -2, y: 0 }, { x: 2, y: 0 },
+    // addicional spaces line above
+    { x: -2, y: -1 }, { x: 2, y: -1 },
+    // two lines above
+    { x: 0, y: -2 },
+];
+
+export const getPieceValidPosition = (board, piece) => {
+    let newPiece = { ...piece };
+    for (let pos of positionsToTry) {
+        if (areValidPositions(board, calculatePiecePositions(newPiece))) {
+            break;
+        }
+        newPiece = { ...piece, x: piece.x + pos.x, y: piece.y + pos.y };
+    }
+
+
+    // positionsToTry.forEach((pos) => {
+    //     const newPiece = { ...piece, x: piece.x + pos.x, y: piece.y + pos.y };
+    //     const piecePositions = calculatePiecePositions(newPiece);
+    //     console.log('validating')
+    //     if (areValidPositions(board, piecePositions)) {
+    //         console.log('returning')
+    //         return newPiece;
+    //     }
+    // })
+    // console.error('This should never happen! we must always find a good position for a piece');
+    return newPiece;
+}
+
 const removeFullLines = (board) => {
     let linesWithoutFilled = board.filter((line) => !isLineFilled(line));
     let nrLinesRemoved = board.length - linesWithoutFilled.length;
