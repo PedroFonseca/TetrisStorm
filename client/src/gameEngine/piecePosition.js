@@ -51,18 +51,6 @@ export const getPieceValidPosition = (board, piece) => {
         }
         newPiece = { ...piece, x: piece.x + pos.x, y: piece.y + pos.y };
     }
-
-
-    // positionsToTry.forEach((pos) => {
-    //     const newPiece = { ...piece, x: piece.x + pos.x, y: piece.y + pos.y };
-    //     const piecePositions = calculatePiecePositions(newPiece);
-    //     console.log('validating')
-    //     if (areValidPositions(board, piecePositions)) {
-    //         console.log('returning')
-    //         return newPiece;
-    //     }
-    // })
-    // console.error('This should never happen! we must always find a good position for a piece');
     return newPiece;
 }
 

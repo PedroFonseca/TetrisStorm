@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GameProvider from './context/GameProvider'; 
 import Board from './components/Board';
+import Queue from './components/Queue';
 import './App.css';
 
 class App extends Component {
@@ -9,6 +10,7 @@ class App extends Component {
       <GameProvider>
         <div className="App">
           <Board />
+          <Queue />
         </div>
       </GameProvider>
     );

@@ -1,0 +1,62 @@
+.queue {
+    border: 1px solid black;
+    background-color: lightgray;
+}
+
+.queuePieceWrapper {
+    display: flex;
+    justify-content: center;
+    margin: 7px;
+}
+
+.queuePieceBorder {
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: gray;
+}
+
+.queuePiece {
+    height: 90px;
+    width: 90px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 4px;
+    background-color: black;
+}
+
+.queueRow {
+    display: flex;
+}
+
+.queueCell {
+    display: inline-block;
+    border: 1px solid black;
+    border-top-width: 0;
+    border-right-width: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.first.queuePiece {
+    width: 130px;
+    height: 130px;
+}
+
+.first .queueCell {
+    width: 25px;
+    height: 25px;
+}
+
+.second.queuePiece {
+    width: 100px;
+    height: 100px;
+}
+
+.second .queueCell {
+    width: 22px;
+    height: 22px;
+}

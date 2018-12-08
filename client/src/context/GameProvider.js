@@ -28,7 +28,8 @@ export default class GameProvider extends Component {
     render(){
         return (
             <GameContext.Provider value={{
-                    board: drawBoard(this.state.board, this.state.piece), 
+                    board: drawBoard(this.state.board, this.state.piece),
+                    queue: this.state.queue,
                 }}>
                 { this.props.children }
             </GameContext.Provider>
