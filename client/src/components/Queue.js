@@ -11,28 +11,14 @@ const propTypes= {
 };
 
 class Queue extends Component {
-  constructor(props) {
-    super(props);
-
-    this._renderPiece = this.renderPiece.bind(this);
-  }
-
-  render() {
-    return (
-        <div className="queue">
-          {/* { this.renderLines(this.props.board) } */}
-          { this.renderPiece(PIECE_TYPE.I, "first") }
-          { this.renderPiece(PIECE_TYPE.I, "second") }
-          { this.renderPiece(PIECE_TYPE.I) }
-          { this.renderPiece(PIECE_TYPE.J) }
-          { this.renderPiece(PIECE_TYPE.L) }
-          { this.renderPiece(PIECE_TYPE.O) }
-          { this.renderPiece(PIECE_TYPE.S) }
-          { this.renderPiece(PIECE_TYPE.T) }
-          { this.renderPiece(PIECE_TYPE.Z) }
-        </div>
-    );
-  }
+    render() {
+        return (
+            <div className="queue">
+                { this.props.queue.map((t, i) =>
+                    this.renderPiece(t, classNames({ "first": i === 0, "second": i === 1 }))) }
+            </div>
+        );
+    }
 
   renderPiece(pieceType, extraClass) {
     return this.renderPieceArray(this.getPiecePositions(pieceType), pieceType, extraClass);

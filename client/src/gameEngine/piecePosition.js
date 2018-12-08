@@ -89,12 +89,12 @@ export const calculatePiecePositions = ({ type, x, y, angle }) => {
                 return [{ x: x+1, y: y-1 }, { x: x-1, y }, { x, y }, { x: x+1, y } ];
             }
             if (angle === 90) {
-                return [{ x: x-1, y: y+1 }, { x, y: y-1 }, { x, y }, { x, y: y+1 } ];
+                return [{ x, y: y-1 }, { x, y }, { x, y: y+1 }, { x: x+1, y: y+1 } ];
             }
             if (angle === 180) {
-                return [{ x: x-1, y: y-1 }, { x: x+1, y }, { x, y }, { x: x-1, y } ];
+                return [{ x: x-1, y: y-1 }, { x: x, y: y-1 }, { x: x+1, y: y-1 }, { x: x-1, y } ];
             }
-            return [{ x: x+1, y: y-1 }, { x, y: y-1 }, { x, y }, { x, y: y+1 } ];
+            return [{ x: x-1, y: y-1 }, { x, y: y-1 }, { x, y }, { x, y: y+1 } ];
         case PIECE_TYPE.O:
             return [{ x, y }, { x: x+1, y }, { x, y: y+1 }, { x: x+1, y: y+1 } ];
         case PIECE_TYPE.S:

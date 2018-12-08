@@ -1,22 +1,16 @@
 import React from 'react';
-import { generateBoard } from '../util/helperFunctions';
-import { PIECE_TYPE } from '../constants';
+import { generateBoard, generateArray, getRandomPiece } from '../util/helperFunctions';
 
 export const defaultContextValue = {
     board: generateBoard(),
     piece: {
-        type: PIECE_TYPE.S,
+        type: getRandomPiece(),
         x: 4,
         y: 1,
         angle: 0,
     },
-    queue: [
-        PIECE_TYPE.J,
-        PIECE_TYPE.L,
-        PIECE_TYPE.O,
-        PIECE_TYPE.S,
-        PIECE_TYPE.T,
-    ],
+    queue: generateArray(5).map(getRandomPiece),
 };
+
 
 export const GameContext = React.createContext(defaultContextValue);

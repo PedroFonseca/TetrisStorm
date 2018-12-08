@@ -1,5 +1,5 @@
-import { PIECE_TYPE } from '../constants';
 import { isValidPiecePosition, placePieceOnBoard, getPieceValidPosition } from './piecePosition';
+import { getRandomPiece } from '../util/helperFunctions';
 
 const left = ( angle ) => angle === 270 ? 0 : angle + 90;
 const right = ( angle ) => angle === 0 ? 270 : angle - 90;
@@ -22,7 +22,7 @@ export const turnRight = ({ board, piece }) => {
     };
 };
 
-export const moveDown =  ({ board, piece }) => {
+export const moveDown =  ({ board, piece, queue }) => {
     const pieceNewLocation = {
         piece: {
             ...piece,
@@ -38,18 +38,19 @@ export const moveDown =  ({ board, piece }) => {
     return {
         board: placePieceOnBoard(board, piece), 
         piece: {
-            type: PIECE_TYPE.J,
+            type: queue[0],
             x: 4,
             y: 1,
             angle: 0,
         },
+        queue: [ ...queue.slice(1), getRandomPiece() ],
     }
 };
 
-export const drop = ({ board, piece }) => {
-    let result = moveDown({ board, piece });
+export const drop = ({ board, piece, queue }) => {
+    let result = moveDown({ board, piece, queue });
     while(!result.board){
-        result = moveDown({ board, piece: result.piece });
+        result = moveDown({ board, piece: result.piece, queue });
     }
     return result;
 };
