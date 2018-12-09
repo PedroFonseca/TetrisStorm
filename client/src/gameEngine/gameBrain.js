@@ -37,15 +37,17 @@ export const moveDown =  ({ board, piece, queue }) => {
     // This is when the piece hits something. We need to move it to the board and get new piece
     return {
         board: placePieceOnBoard(board, piece), 
-        piece: {
-            type: queue[0],
-            x: 4,
-            y: 1,
-            angle: 0,
-        },
+        piece: getNewPiece(queue[0]),
         queue: [ ...queue.slice(1), getRandomPiece() ],
     }
 };
+
+const getNewPiece = (pieceType) => ({  
+    type: pieceType,
+    x: 4,
+    y: 1,
+    angle: 0,
+})
 
 export const drop = ({ board, piece, queue }) => {
     let result = moveDown({ board, piece, queue });
@@ -78,3 +80,11 @@ export const moveRight = ({ board, piece }) => {
     // Improvement: In this case we didn't need to update state
     return isValidPiecePosition(board, pieceNewLocation.piece) ? pieceNewLocation : piece;
 };
+
+export const pocket = ({ piece, queue, pocket }) => {
+    return {
+        piece: getNewPiece(pocket !== undefined ? pocket : queue[0]),
+        queue: pocket !== undefined ? queue : [ ...queue.slice(1), getRandomPiece() ],
+        pocket: piece.type,
+    }
+}

@@ -1,9 +1,9 @@
-.queue {
+.pocket {
     border: 1px solid black;
     background-color: lightgray;
 }
 
-.nextText {
+.holdText {
     font-size: 16px;
     text-align: center;
 }

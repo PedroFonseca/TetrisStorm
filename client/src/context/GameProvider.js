@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { GameContext, defaultContextValue } from './gameContext';
 import { drawBoard } from '../gameEngine/drawBoard';
-import { turnLeft, turnRight, moveDown, moveLeft, moveRight, drop } from '../gameEngine/gameBrain';
+import { turnLeft, turnRight, moveDown, moveLeft, moveRight, drop, pocket } from '../gameEngine/gameBrain';
 
 export default class GameProvider extends Component {
     constructor(props) {
@@ -30,6 +30,7 @@ export default class GameProvider extends Component {
             <GameContext.Provider value={{
                     board: drawBoard(this.state.board, this.state.piece),
                     queue: this.state.queue,
+                    pocket: this.state.pocket,
                 }}>
                 { this.props.children }
             </GameContext.Provider>
@@ -43,6 +44,7 @@ export default class GameProvider extends Component {
             case 'ArrowRight': this.setState(prevState => moveRight(prevState)); break;
             case 'ArrowLeft': this.setState(prevState => moveLeft(prevState)); break;
             case 'Space': this.setState(prevState => drop(prevState)); break;
+            case 'ShiftLeft': this.setState(prevState => pocket(prevState)); break;
             default: console.log(key.code); break;
         }
     }

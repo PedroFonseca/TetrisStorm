@@ -10,6 +10,7 @@ export const defaultContextValue = {
         angle: 0,
     },
     queue: generateArray(5).map(getRandomPiece),
+    pocket: undefined,
 };
 
 
