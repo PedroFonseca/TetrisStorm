@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { string, number } from 'prop-types';
+import { string } from 'prop-types';
 import classNames from 'classnames';
 import { withGameProvider } from '../context/withGameProvider';
 import { PIECE_TYPE } from '../constants';

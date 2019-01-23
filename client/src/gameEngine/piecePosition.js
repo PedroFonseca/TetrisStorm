@@ -58,7 +58,10 @@ const removeFullLines = (board) => {
     let linesWithoutFilled = board.filter((line) => !isLineFilled(line));
     let nrLinesRemoved = board.length - linesWithoutFilled.length;
 
-    return nrLinesRemoved === 0 ? board : addEmptyLines(linesWithoutFilled, nrLinesRemoved);
+    return {
+        board: nrLinesRemoved === 0 ? board : addEmptyLines(linesWithoutFilled, nrLinesRemoved),
+        nrLinesRemoved,
+    };
 }
 
 const addEmptyLines = (board, nrLines) => [...generateLines(nrLines), ...board];

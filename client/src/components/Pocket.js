@@ -12,7 +12,9 @@ class Pocket extends Component {
     render() {
         return (
             <div className="pocket">
-                <div className="holdText">HOLT</div>
+                <div className="linesText">Lines</div>
+                <div className="linesValue">{this.props.lines}</div>
+                <div className="holdText">HOLD</div>
                 <SidePiece pieceType={ this.props.pocket } extraClass="first" />
             </div>
         );

@@ -22,7 +22,7 @@ export const turnRight = ({ board, piece }) => {
     };
 };
 
-export const moveDown =  ({ board, piece, queue }) => {
+export const moveDown =  ({ board, piece, queue, lines }) => {
     const pieceNewLocation = {
         piece: {
             ...piece,
@@ -35,11 +35,14 @@ export const moveDown =  ({ board, piece, queue }) => {
     }
     
     // This is when the piece hits something. We need to move it to the board and get new piece
+    const result = placePieceOnBoard(board, piece);
+
     return {
-        board: placePieceOnBoard(board, piece), 
+        board: result.board,
         piece: getNewPiece(queue[0]),
         queue: [ ...queue.slice(1), getRandomPiece() ],
-    }
+        lines: lines + result.nrLinesRemoved,
+    };
 };
 
 const getNewPiece = (pieceType) => ({  
@@ -49,10 +52,10 @@ const getNewPiece = (pieceType) => ({
     angle: 0,
 })
 
-export const drop = ({ board, piece, queue }) => {
-    let result = moveDown({ board, piece, queue });
+export const drop = ({ board, piece, queue, lines }) => {
+    let result = moveDown({ board, piece, queue, lines });
     while(!result.board){
-        result = moveDown({ board, piece: result.piece, queue });
+        result = moveDown({ board, piece: result.piece, queue, lines });
     }
     return result;
 };

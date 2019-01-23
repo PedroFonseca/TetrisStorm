@@ -31,6 +31,7 @@ export default class GameProvider extends Component {
                     board: drawBoard(this.state.board, this.state.piece),
                     queue: this.state.queue,
                     pocket: this.state.pocket,
+                    lines: this.state.lines,
                 }}>
                 { this.props.children }
             </GameContext.Provider>

@@ -11,6 +11,7 @@ export const defaultContextValue = {
     },
     queue: generateArray(5).map(getRandomPiece),
     pocket: undefined,
+    lines: 0,
 };
 
 
